@@ -1,7 +1,9 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "./user.interface";
+import { IUser } from "../bike/bike.interface";
+import { userRoles } from "./user.constant";
+import { TUser } from "./user.interface";
 
-const userSchema = new Schema<IUser>({
+const userSchema = new Schema<TUser>({
 	name: {
 		type: String,
 		required: [true, "Name is required"],
@@ -29,8 +31,10 @@ const userSchema = new Schema<IUser>({
 		required: [true, "Address is required"],
 	},
 	role: {
-		type: String,
-		required: [true, "Role is required"],
+		enum: {
+			values: userRoles,
+		},
+		default: "user",
 	},
 	isDeleted: {
 		type: Boolean,
@@ -38,6 +42,6 @@ const userSchema = new Schema<IUser>({
 	},
 });
 
-const User = mongoose.model<IUser>("User", userSchema);
+const User = mongoose.model<TUser>("User", userSchema);
 
 export { IUser, User };
