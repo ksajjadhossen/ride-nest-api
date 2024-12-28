@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { userRoles } from "./user.constant";
 
 const userSchema = z.object({
 	name: z.string({
@@ -23,7 +24,7 @@ const userSchema = z.object({
 	address: z.string({
 		required_error: "Address is required",
 	}),
-	role: z.enum(["user", "admin"]),
+	role: z.enum([...userRoles] as [string, ...string[]]),
 	isDeleted: z.boolean({
 		required_error: "isDeleted field is required",
 	}),

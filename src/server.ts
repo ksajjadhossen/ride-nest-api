@@ -1,9 +1,7 @@
+import mongoose from "mongoose";
 import app from "./app";
 import config from "./config";
-
 const port = 5000;
-
-const mongoose = require("mongoose");
 
 try {
 	main().catch((err) => console.log(err));
