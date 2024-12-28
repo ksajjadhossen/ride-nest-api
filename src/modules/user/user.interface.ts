@@ -1,0 +1,10 @@
+export interface IUser {
+	name: string;
+	id: string;
+	email: string;
+	password: string;
+	phone: string;
+	address: string;
+	role: string;
+	isDeleted: boolean;
+}
