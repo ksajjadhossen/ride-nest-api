@@ -14,7 +14,16 @@ const getAllUsers = async () => {
 	return result;
 };
 
+const updateUser = async (payload: string, data: Partial<TUser>) => {
+	if (!payload || !data) {
+		throw new Error("Data could not found");
+	}
+	const result = await User.findByIdAndUpdate(payload, data, { new: true });
+	return result;
+};
+
 export const userService = {
 	createUser,
 	getAllUsers,
+	updateUser,
 };

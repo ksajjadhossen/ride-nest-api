@@ -11,4 +11,9 @@ router.post(
 	userController.createUser
 );
 router.get("/get-all-users", userController.getAllUsers);
+router.patch(
+	"/update-user/:userId",
+	validateRequest(userValidation.updateUserValidationSchema),
+	userController.updateUser
+);
 export const userRouter = router;
