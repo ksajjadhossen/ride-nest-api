@@ -8,7 +8,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 	try {
 		const result = await userService.createUser(data);
 		res.send({
-			status: httpStatus.NOT_FOUND,
+			status: httpStatus.OK,
 			success: true,
 			message: "user Created Successfully",
 			data: result,
