@@ -19,7 +19,6 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
-	console.log("22 line");
 	const result = await userService.getAllUsers();
 	res.send({
 		status: httpStatus.NOT_FOUND,
