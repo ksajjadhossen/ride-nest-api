@@ -22,8 +22,19 @@ const updateUser = async (payload: string, data: Partial<TUser>) => {
 	return result;
 };
 
+const deleteUser = async (payload: string) => {
+	console.log(payload);
+	const result = await User.findByIdAndUpdate(
+		payload,
+		{ isDeleted: true },
+		{ new: true }
+	);
+	return result;
+};
+
 export const userService = {
 	createUser,
 	getAllUsers,
 	updateUser,
+	deleteUser,
 };

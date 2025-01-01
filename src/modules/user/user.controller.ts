@@ -39,8 +39,20 @@ const updateUser: RequestHandler = catchAsync(async (req, res) => {
 		data: result,
 	});
 });
+
+const deleteUser: RequestHandler = catchAsync(async (req, res) => {
+	const { userId } = req.params;
+	const result = await userService.deleteUser(userId);
+	res.send({
+		status: httpStatus.OK,
+		success: true,
+		message: "user updated Successfully",
+		data: result,
+	});
+});
 export const userController = {
 	createUser,
 	getAllUsers,
 	updateUser,
+	deleteUser,
 };
