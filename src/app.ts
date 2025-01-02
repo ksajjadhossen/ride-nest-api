@@ -10,7 +10,7 @@ app.use("/health", (req, res) => {
 });
 
 app.use("/api/user-route/", userRouter);
-app.use("/api/bike-model-route/", bikeModelRoute);
+app.use("/api/bike-route/", bikeModelRoute);
 
 app.get("/", userController.createUser);
 

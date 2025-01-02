@@ -11,4 +11,6 @@ router.post(
 	bikeController.createBike
 );
 
+router.patch("/update-bike/:bikeId", bikeController.updateBike);
+
 export const bikeModelRoute = router;

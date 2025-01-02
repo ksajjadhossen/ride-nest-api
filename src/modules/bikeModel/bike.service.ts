@@ -7,6 +7,22 @@ const createBike = async (payload: TBike) => {
 	return result;
 };
 
+const updateBike = async (payload: string, bikeData: Partial<TBike>) => {
+	if (!payload || !bikeData) {
+		throw new Error("Data is messing");
+	}
+	const mainData = await Bike.findById(payload);
+	if (!mainData) {
+		throw new Error("Here is no data.");
+	}
+	const result = await Bike.findByIdAndUpdate(payload, bikeData, {
+		success: true,
+		new: true,
+	});
+	return result;
+};
+
 export const bikeService = {
 	createBike,
+	updateBike,
 };
