@@ -1,6 +1,5 @@
 export interface IUser {
 	name: string;
-	id: string;
 	pricePerHour: number;
 	isAvailable: boolean;
 	cc: number;

@@ -7,11 +7,6 @@ const userSchema = new Schema<IUser>(
 			type: String,
 			required: [true, "Name is required."],
 		},
-		id: {
-			type: String,
-			required: [true, "ID is required."],
-			match: [/^[0-9a-fA-F]{24}$/, "ID must be a valid MongoDB ObjectId."],
-		},
 		pricePerHour: {
 			type: Number,
 			required: [true, "Price per hour is required."],
