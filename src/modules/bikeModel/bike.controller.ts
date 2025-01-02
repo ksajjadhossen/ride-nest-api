@@ -1,14 +1,15 @@
 import { Request, RequestHandler, Response } from "express";
+import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
+import { bikeService } from "./bike.service";
 
 const createBike: RequestHandler = catchAsync(
 	async (req: Request, res: Response) => {
-		console.log(req.body);
-		const result = "";
+		const result = await bikeService.createBike(req.body);
 		res.send({
 			status: httpStatus.OK,
 			success: true,
-			message: "user updated Successfully",
+			message: "bike created Successfully",
 			data: result,
 		});
 	}

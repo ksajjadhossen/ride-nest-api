@@ -23,3 +23,7 @@ const createBikeModelValidationSchema = z.object({
 			.min(0, "Charge capacity must be a positive number."),
 	}),
 });
+
+export const bikeValidation = {
+	createBikeModelValidationSchema,
+};

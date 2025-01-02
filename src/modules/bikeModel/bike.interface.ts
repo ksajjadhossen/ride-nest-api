@@ -1,4 +1,4 @@
-export interface IUser {
+export interface TBike {
 	name: string;
 	pricePerHour: number;
 	isAvailable: boolean;

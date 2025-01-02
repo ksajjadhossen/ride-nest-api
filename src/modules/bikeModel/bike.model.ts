@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "./bike.interface";
+import { TBike } from "./bike.interface";
 
-const userSchema = new Schema<IUser>(
+const bikeSchema = new Schema<TBike>(
 	{
 		name: {
 			type: String,
@@ -81,6 +81,6 @@ const userSchema = new Schema<IUser>(
 	{ timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const Bike = mongoose.model("Bike", bikeSchema);
 
-module.exports = User;
+export { Bike };
