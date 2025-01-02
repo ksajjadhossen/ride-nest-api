@@ -10,6 +10,7 @@ export interface TBike {
 	coverImage: string;
 	isElectric: boolean;
 	chargeCapacity: number;
+	isDeleted: boolean;
 	createdAt: Date;
 	updatedAt: Date;
 }

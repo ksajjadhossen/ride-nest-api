@@ -57,6 +57,10 @@ const bikeSchema = new Schema<TBike>(
 			min: [0, "Charge capacity must be a positive number."],
 			required: false,
 		},
+		isDeleted: {
+			type: Boolean,
+			default: false,
+		},
 		createdAt: {
 			type: Date,
 			default: Date.now,

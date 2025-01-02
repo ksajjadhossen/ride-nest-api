@@ -12,5 +12,7 @@ router.post(
 );
 
 router.patch("/update-bike/:bikeId", bikeController.updateBike);
+router.get("/get-all-bike", bikeController.getAllBike);
+router.delete("/delete-bike/:bikeId", bikeController.deleteBike);
 
 export const bikeModelRoute = router;
