@@ -1,0 +1,36 @@
+{
+	"name": "ride-nest",
+	"version": "1.0.0",
+	"license": "ISC",
+	"author": "",
+	"type": "commonjs",
+	"main": "index.js",
+	"scripts": {
+		"start:prod": "node ./dist/server.js",
+		"start:dev": "npx ts-node-dev --respawn --transpile-only ./src/server.ts",
+		"lint": "npx eslint src",
+		"lint:fix": "npx eslint src --fix",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"description": "",
+	"devDependencies": {
+		"@eslint/js": "^9.17.0",
+		"@types/express": "^5.0.0",
+		"eslint": "^9.17.0",
+		"nodemon": "^3.1.9",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.7.2",
+		"typescript-eslint": "^8.18.2"
+	},
+	"dependencies": {
+		"@types/http-status": "^0.2.30",
+		"@types/jsonwebtoken": "^9.0.7",
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2",
+		"http-status": "^2.0.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.9.2",
+		"zod": "^3.24.1"
+	}
+}
