@@ -1,4 +1,6 @@
+import bcrypt from "bcryptjs";
 import mongoose, { Schema } from "mongoose";
+import config from "../../config";
 import { userRoles } from "./user.constant"; // Assuming this is where you define userRoles
 import { TUser } from "./user.interface";
 
@@ -41,6 +43,15 @@ const userSchema = new Schema<TUser>(
 		timestamps: true,
 	}
 );
+
+userSchema.pre("save", async function () {
+	const plainPassword = this.password;
+	const encryptedPassword = await bcrypt.hash(
+		plainPassword,
+		Number(config.salt_rounds) as number
+	);
+	return (this.password = encryptedPassword);
+});
 
 const User = mongoose.model<TUser>("User", userSchema);
 
