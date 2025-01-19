@@ -1,42 +1,48 @@
 import bcrypt from "bcryptjs";
+import httpStatus from "http-status";
 import Jwt from "jsonwebtoken";
 import config from "../../config";
+import AppError from "../../errors/AppError";
 import { TUser } from "../user/user.interface";
 import { User } from "../user/user.model";
-import { TLogIn } from "./auth.interface";
 
 const createUser = async (payload: TUser) => {
 	const isUserExists = await User.findOne({ email: payload.email });
 	if (isUserExists) {
-		throw new Error("this email already exists");
+		throw new AppError(httpStatus.CONFLICT, "this email already exists");
 	}
-	if (!payload) {
-		throw new Error("data could not found");
-	}
+
 	const result = await User.create(payload);
 	return result;
 };
 
-const logInUser = async (payload: TLogIn) => {
-	const user = await User.findOne({ email: payload.email });
+const logInUser = async (payload: TUser) => {
+	const user = await User.findOne({ email: payload.email }).select("+password");
 	if (!user) {
-		throw new Error("this email is not exists");
+		throw new AppError(httpStatus.NOT_FOUND, "User not found");
 	}
 
 	const isPasswordMatched = bcrypt.compareSync(payload.password, user.password);
 	if (!isPasswordMatched) {
-		throw new Error("Invalid password");
+		throw new AppError(httpStatus.BAD_REQUEST, "Invalid credentials");
 	}
-	const fooBar = {
-		id: user.id,
+	const jwtPayload = {
+		role: user.role,
 		name: user.name,
 		email: user.email,
 	};
-	const jwtAccessToken = Jwt.sign(fooBar, config.jwt_secret as string);
+
+	const jwtAccessToken = Jwt.sign(jwtPayload, config.jwt_secret as string, {
+		expiresIn: "30d",
+	});
+
+	const jwtRefreshToken = Jwt.sign(jwtPayload, config.jwt_secret as string, {
+		expiresIn: "90d",
+	});
 
 	return {
-		success: true,
-		jwt_access_token: jwtAccessToken,
+		accessToken: jwtAccessToken,
+		refreshToken: jwtRefreshToken,
 	};
 };
 

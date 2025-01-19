@@ -21,12 +21,18 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 
 const loginUser = catchAsync(
 	async (req: Request, res: Response, next: NextFunction) => {
-		const result = await authService.logInUser(req.body);
-		res.send({
+		const { accessToken, refreshToken } = await authService.logInUser(req.body);
+
+		// send refresh token on cookie
+		res.cookie("refresh_token", refreshToken);
+
+		res.status(200).json({
 			status: httpStatus.OK,
 			success: true,
 			message: "user logged In successfully",
-			data: result,
+			data: {
+				token: accessToken,
+			},
 		});
 	}
 );

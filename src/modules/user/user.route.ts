@@ -1,15 +1,18 @@
 import { Router } from "express";
+import Auth from "../../middleware/auth";
 import validateRequest from "../../middleware/validateRequest";
 import { userController } from "./user.controller";
 import { userValidation } from "./user.validation";
 
 const router = Router();
 
-router.get("/users", userController.getAllUsers);
+router.get("/", Auth("admin"), userController.getAllUsers);
+
 router.patch(
-	"/users/:userId",
+	"/:userId",
 	validateRequest(userValidation.updateUserValidationSchema),
 	userController.updateUser
 );
-router.delete("/users/:userId", userController.deleteUser);
+router.delete("/:userId", userController.deleteUser);
+
 export const userRouter = router;

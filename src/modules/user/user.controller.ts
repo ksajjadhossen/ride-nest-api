@@ -4,11 +4,13 @@ import catchAsync from "../../utils/catchAsync";
 import { userService } from "./user.service";
 
 const getAllUsers: RequestHandler = catchAsync(async (req, res) => {
+	console.log({ loggedInUser: req.user });
+
 	const result = await userService.getAllUsers();
 	res.send({
 		status: httpStatus.OK,
 		success: true,
-		message: "user Created Successfully",
+		message: "Users retrieved successfully",
 		data: result,
 	});
 });

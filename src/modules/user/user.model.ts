@@ -21,6 +21,7 @@ const userSchema = new Schema<TUser>(
 			type: String,
 			required: [true, "Password is required"],
 			minlength: [6, "Password must be at least 6 characters long"],
+			select: 0, // Hide password field from response
 		},
 		phone: {
 			type: String,
@@ -52,6 +53,11 @@ userSchema.pre("save", async function () {
 		Number(config.salt_rounds) as number
 	);
 	return (this.password = encryptedPassword);
+});
+
+userSchema.post("save", function (doc, next) {
+	doc.password = "";
+	next();
 });
 
 const User = mongoose.model<TUser>("User", userSchema);
