@@ -1,4 +1,5 @@
 import { Router } from "express";
+import Auth from "../../middleware/auth";
 import validateRequest from "../../middleware/validateRequest";
 import { authController } from "./auth.controller";
 import { authValidation } from "./auth.validation";
@@ -15,5 +16,5 @@ router.post(
 	validateRequest(authValidation.logInValidationSchema),
 	authController.loginUser
 );
-
+router.get("/me", Auth("user"), authController.userProfile);
 export const authRouter = router;

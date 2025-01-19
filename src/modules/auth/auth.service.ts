@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import httpStatus from "http-status";
-import Jwt from "jsonwebtoken";
+import Jwt, { JwtPayload } from "jsonwebtoken";
 import config from "../../config";
 import AppError from "../../errors/AppError";
 import { TUser } from "../user/user.interface";
@@ -46,7 +46,17 @@ const logInUser = async (payload: TUser) => {
 	};
 };
 
+const userProfile = async (payload: JwtPayload) => {
+	const result = await User.findOne({ email: payload.email });
+	if (!result) {
+		throw new AppError(httpStatus.NOT_FOUND, "User not found");
+	}
+
+	return result;
+};
+
 export const authService = {
 	createUser,
 	logInUser,
+	userProfile,
 };

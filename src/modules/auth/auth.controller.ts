@@ -36,8 +36,18 @@ const loginUser = catchAsync(
 		});
 	}
 );
+const userProfile = catchAsync(async (req: Request, res: Response) => {
+	const result = await authService.userProfile(req.user);
+	res.status(200).json({
+		status: httpStatus.OK,
+		success: true,
+		message: "profile get successfully completed",
+		data: result,
+	});
+});
 
 export const authController = {
 	createUser,
 	loginUser,
+	userProfile,
 };
