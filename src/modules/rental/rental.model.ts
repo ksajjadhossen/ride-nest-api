@@ -2,13 +2,13 @@ import { model, Schema } from "mongoose";
 import { TRental } from "./rental.interface";
 
 const rentalSchema = new Schema<TRental>({
-	bikeId: {
-		type: String,
+	userId: {
+		type: Schema.Types.ObjectId,
 		required: true,
 	},
-	userId: {
-		type: String,
-		default: "here is the user id;",
+	bikeId: {
+		type: Schema.Types.ObjectId,
+		required: true,
 	},
 	startTime: {
 		type: Date,
@@ -16,11 +16,18 @@ const rentalSchema = new Schema<TRental>({
 	},
 	returnTime: {
 		type: Date,
+		default: null,
 	},
 	totalCost: {
 		type: Number,
+		required: true,
+		default: 0,
 	},
-	isReturned: { type: Boolean, default: false },
+	isReturned: {
+		type: Boolean,
+		default: false,
+		required: false,
+	},
 });
 
 const Rental = model<TRental>("Rental", rentalSchema);

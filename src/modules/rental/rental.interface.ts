@@ -1,10 +1,10 @@
-import { ObjectId } from "mongoose";
+import { Types } from "mongoose";
 
 export type TRental = {
-	bikeId: ObjectId;
-	userId: ObjectId;
+	userId: Types.ObjectId;
+	bikeId: Types.ObjectId;
 	startTime: Date;
 	returnTime: Date;
 	totalCost: number;
-	isReturned?: boolean;
+	isReturned: boolean;
 };

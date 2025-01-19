@@ -5,7 +5,8 @@ import { rentalService } from "./rental.service";
 
 const createRentals: RequestHandler = catchAsync(async (req, res) => {
 	const data = req.body;
-	const result = await rentalService.createRentals(data);
+	const userData = req.user;
+	const result = await rentalService.createRentals(data, userData);
 	res.send({
 		success: true,
 		status: httpStatus.OK,

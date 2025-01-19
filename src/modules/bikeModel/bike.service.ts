@@ -1,3 +1,5 @@
+import httpStatus from "http-status";
+import AppError from "../../errors/AppError";
 import { TBike } from "./bike.interface";
 import { Bike } from "./bike.model";
 
@@ -9,7 +11,7 @@ const createBike = async (payload: TBike) => {
 const updateBike = async (payload: string, bikeData: Partial<TBike>) => {
 	const mainData = await Bike.findById(payload);
 	if (!mainData) {
-		throw new Error("Here is no data.");
+		throw new AppError(httpStatus.NOT_FOUND, "Here is no data.");
 	}
 	const result = await Bike.findByIdAndUpdate(payload, bikeData, {
 		success: true,
@@ -26,7 +28,7 @@ const getAllBike = async () => {
 const deleteBike = async (payload: string) => {
 	const mainData = await Bike.findById(payload);
 	if (!mainData) {
-		throw new Error("Here is no data");
+		throw new AppError(httpStatus.NOT_FOUND, "Here is no data.");
 	}
 	const result = await Bike.findByIdAndUpdate(
 		payload,
