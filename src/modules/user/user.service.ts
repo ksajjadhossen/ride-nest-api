@@ -12,7 +12,6 @@ const updateUser = async (payload: string, data: Partial<TUser>) => {
 	if (!userData) {
 		throw new AppError(httpStatus.NOT_FOUND, "User not found");
 	}
-	console.log("here is the userData", userData);
 	if (!payload || !data) {
 		throw new AppError(httpStatus.NOT_FOUND, "User not found");
 	}

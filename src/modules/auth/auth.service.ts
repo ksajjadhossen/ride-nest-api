@@ -39,7 +39,6 @@ const logInUser = async (payload: TUser) => {
 	const jwtRefreshToken = Jwt.sign(jwtPayload, config.jwt_secret as string, {
 		expiresIn: "90d",
 	});
-	console.log("here is the user data", user);
 	return {
 		accessToken: jwtAccessToken,
 		refreshToken: jwtRefreshToken,
