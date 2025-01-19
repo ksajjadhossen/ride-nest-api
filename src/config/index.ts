@@ -6,4 +6,5 @@ export default {
 	user_name: process.env.USER_NAME,
 	user_password: process.env.USER_PASSWORD,
 	salt_rounds: process.env.SALT_ROUNDS,
+	jwt_secret: process.env.JWT_SECRET,
 };
