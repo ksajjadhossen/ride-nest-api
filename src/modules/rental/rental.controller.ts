@@ -15,6 +15,18 @@ const createRentals: RequestHandler = catchAsync(async (req, res) => {
 	});
 });
 
+const updateRentals: RequestHandler = catchAsync(async (req, res) => {
+	const { id } = req.params;
+	const result = await rentalService.updateRentals(id);
+	res.send({
+		success: true,
+		status: httpStatus.OK,
+		message: "rental updated successfully.",
+		data: result,
+	});
+});
+
 export const rentalController = {
 	createRentals,
+	updateRentals,
 };
