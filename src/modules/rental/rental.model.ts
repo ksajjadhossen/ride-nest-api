@@ -4,10 +4,12 @@ import { TRental } from "./rental.interface";
 const rentalSchema = new Schema<TRental>({
 	userId: {
 		type: Schema.Types.ObjectId,
+		ref: "User",
 		required: true,
 	},
 	bikeId: {
 		type: Schema.Types.ObjectId,
+		ref: "Bike",
 		required: true,
 	},
 	startTime: {
